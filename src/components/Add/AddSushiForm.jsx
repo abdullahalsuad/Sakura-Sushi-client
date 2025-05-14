@@ -1,31 +1,43 @@
-import React, { useState } from "react";
+import React from "react";
+import { toast } from "react-toastify";
 
 const AddSushiForm = () => {
-  const [form, setForm] = useState({
-    name: "",
-    chef: "",
-    photoUrl: "",
-    price: "",
-    cookTime: "",
-    details: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm({
-      ...form,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("New Sushi Added:", form);
-    alert("Sushi added successfully!");
+    const form = e.target;
+    const formData = new FormData(form);
+    const sushiData = Object.fromEntries(formData.entries());
+    console.log(sushiData);
+
+    // send data to the backend
+
+    try {
+      const response = await fetch("http://localhost:3000/sushi/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(sushiData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Server responded with status: ${response.status}`);
+      }
+
+      const createSushi = await response.json();
+      if (createSushi.insertedId) {
+        console.log("User added:", createSushi);
+        toast.success("Sushi added successfully!");
+      }
+
+      e.target.reset();
+    } catch (error) {
+      console.log("error from sending data to the server", error);
+    }
   };
 
   return (
-    <div className=" min-h-screen py-12 px-4 ">
+    <div className=" min-h-screen px-4 ">
       <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-md p-8 border border-gray-200">
         <h2 className="text-2xl font-bold text-center text-[#0B2B2B] mb-6">
           Add New Sushi
@@ -43,8 +55,6 @@ const AddSushiForm = () => {
               type="text"
               id="name"
               name="name"
-              value={form.name}
-              onChange={handleChange}
               placeholder="e.g., Salmon Nigiri"
               className="w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#0B2B2B] focus:border-transparent"
               required
@@ -63,8 +73,6 @@ const AddSushiForm = () => {
               type="text"
               id="chef"
               name="chef"
-              value={form.chef}
-              onChange={handleChange}
               placeholder="e.g., Chef Haruto"
               className="w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#0B2B2B] focus:border-transparent"
               required
@@ -83,8 +91,6 @@ const AddSushiForm = () => {
               type="url"
               id="photoUrl"
               name="photoUrl"
-              value={form.photoUrl}
-              onChange={handleChange}
               placeholder="https://example.com/sushi.jpg "
               className="w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#0B2B2B] focus:border-transparent"
               required
@@ -103,8 +109,6 @@ const AddSushiForm = () => {
               type="text"
               id="price"
               name="price"
-              value={form.price}
-              onChange={handleChange}
               placeholder="$8"
               className="w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#0B2B2B] focus:border-transparent"
               required
@@ -123,8 +127,6 @@ const AddSushiForm = () => {
               type="text"
               id="cookTime"
               name="cookTime"
-              value={form.cookTime}
-              onChange={handleChange}
               placeholder="e.g., 15 minutes"
               className="w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#0B2B2B] focus:border-transparent"
               required
@@ -143,8 +145,6 @@ const AddSushiForm = () => {
               id="details"
               name="details"
               rows="4"
-              value={form.details}
-              onChange={handleChange}
               placeholder="Describe the sushi ingredients and preparation..."
               className="w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#0B2B2B] focus:border-transparent"
               required

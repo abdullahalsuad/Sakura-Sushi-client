@@ -3,7 +3,8 @@ import App from "../App";
 import Home from "../pages/Home";
 import About from "../pages/About";
 import MenuPage from "../components/menu/MenuPage.jsx";
-import AddSushiForm from "../components/Add/AddSushiForm.jsx";
+
+import SushiDashboard from "../components/Add/SushiDashboard.jsx";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/add",
-        element: <AddSushiForm />,
+        element: <SushiDashboard />,
       },
     ],
   },

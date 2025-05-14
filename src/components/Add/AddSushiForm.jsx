@@ -1,23 +1,25 @@
-import React from "react";
+import React, { use } from "react";
 import { toast } from "react-toastify";
+import { AllSushiDataContext } from "../../context/AllSushiProvider";
 
 const AddSushiForm = () => {
+  const { setSushiData } = use(AllSushiDataContext);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
-    const sushiData = Object.fromEntries(formData.entries());
-    console.log(sushiData);
+    const newSushiData = Object.fromEntries(formData.entries());
+    console.log(newSushiData);
 
     // send data to the backend
-
     try {
       const response = await fetch("http://localhost:3000/sushi/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(sushiData),
+        body: JSON.stringify(newSushiData),
       });
 
       if (!response.ok) {
@@ -26,11 +28,14 @@ const AddSushiForm = () => {
 
       const createSushi = await response.json();
       if (createSushi.insertedId) {
-        console.log("User added:", createSushi);
+        console.log("sushi added:", createSushi);
         toast.success("Sushi added successfully!");
-      }
 
-      e.target.reset();
+        //ui update
+        newSushiData._id = createSushi.insertedId;
+        setSushiData((prev) => [...prev, newSushiData]);
+        e.target.reset();
+      }
     } catch (error) {
       console.log("error from sending data to the server", error);
     }

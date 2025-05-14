@@ -7,6 +7,7 @@ import { TfiMoney } from "react-icons/tfi";
 
 const MenuPage = () => {
   const { sushiData, loading } = use(AllSushiDataContext);
+  console.log(sushiData);
 
   if (loading) {
     return (

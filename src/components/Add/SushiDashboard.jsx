@@ -5,11 +5,11 @@ import SushiList from "./SushiList";
 const SushiDashboard = () => {
   return (
     <>
-      <div className="grid grid-cols-12 w-10/12 mx-auto">
-        <div className="md:col-span-8">
+      <div className="grid lg:grid-cols-12 w-10/12 mx-auto">
+        <div className="lg:col-span-8 col-span-1">
           <SushiList />
         </div>
-        <div className="md:col-span-4">
+        <div className="lg:col-span-4 col-span-1 mt-4">
           <div className="sticky top-24">
             <AddSushiForm />
           </div>

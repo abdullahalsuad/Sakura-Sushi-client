@@ -25,7 +25,7 @@ const AllSushiDataProvider = ({ children }) => {
   }, []);
 
   return (
-    <AllSushiDataContext value={{ sushiData, loading }}>
+    <AllSushiDataContext value={{ sushiData, loading, setSushiData }}>
       {children}
     </AllSushiDataContext>
   );

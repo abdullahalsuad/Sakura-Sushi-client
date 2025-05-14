@@ -9,7 +9,7 @@ import { MdOutlineDelete } from "react-icons/md";
 import Swal from "sweetalert2";
 
 const SushiList = () => {
-  const { sushiData, loading } = use(AllSushiDataContext);
+  const { sushiData, loading, setSushiData } = use(AllSushiDataContext);
 
   if (loading) {
     return <Loading />;
@@ -28,7 +28,6 @@ const SushiList = () => {
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
-     
       console.log(result.isConfirmed);
 
       if (result.isConfirmed) {
@@ -39,6 +38,9 @@ const SushiList = () => {
               "Content-Type": "application/json",
             },
           });
+
+          // Remove from UI
+          setSushiData((prev) => prev.filter((sushi) => sushi._id !== id));
 
           if (response.ok) {
             Swal.fire({

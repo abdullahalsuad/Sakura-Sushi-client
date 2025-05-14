@@ -29,13 +29,16 @@ const SushiUpdate = () => {
 
     //send to backend
     try {
-      const response = await fetch(`http://localhost:3000/sushi/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updateSushi),
-      });
+      const response = await fetch(
+        `https://sakura-sushi-server.vercel.app/sushi/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updateSushi),
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`Server responded with status: ${response.status}`);

@@ -35,12 +35,15 @@ const SushiList = () => {
 
       if (result.isConfirmed) {
         try {
-          const response = await fetch(`http://localhost:3000/sushi/${id}`, {
-            method: "DELETE",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          });
+          const response = await fetch(
+            `https://sakura-sushi-server.vercel.app/sushi/${id}`,
+            {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
 
           // Remove from UI
           setSushiData((prev) => prev.filter((sushi) => sushi._id !== id));

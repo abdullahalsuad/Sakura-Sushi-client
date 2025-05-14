@@ -12,7 +12,9 @@ const AllSushiDataProvider = ({ children }) => {
     // Fetch or load apps here
     const fetchNews = async () => {
       try {
-        const response = await fetch("http://localhost:3000/sushi");
+        const response = await fetch(
+          "https://sakura-sushi-server.vercel.app/sushi"
+        );
         const data = await response.json();
         setSushiData(data);
         setLoading(false);

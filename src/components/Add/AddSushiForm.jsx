@@ -14,13 +14,16 @@ const AddSushiForm = () => {
 
     // send data to the backend
     try {
-      const response = await fetch("http://localhost:3000/sushi/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newSushiData),
-      });
+      const response = await fetch(
+        "https://sakura-sushi-server.vercel.app/sushi",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newSushiData),
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`Server responded with status: ${response.status}`);

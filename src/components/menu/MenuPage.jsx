@@ -4,20 +4,14 @@ import Loading from "../Loading/Loading";
 import { IoTimeOutline } from "react-icons/io5";
 import { PiChefHat } from "react-icons/pi";
 import { TfiMoney } from "react-icons/tfi";
+import { Link } from "react-router";
 
 const MenuPage = () => {
   const { sushiData, loading } = use(AllSushiDataContext);
-  console.log(sushiData);
 
   if (loading) {
-    return (
-      <p>
-        <Loading />
-      </p>
-    );
+    return <Loading />;
   }
-
-  console.log(sushiData);
 
   return (
     <>
@@ -61,9 +55,14 @@ const MenuPage = () => {
                     <span className="text-lg font-bold text-[#0B2B2B] flex items-center ">
                       <TfiMoney /> {sushi.price}
                     </span>
-                    <button className="bg-[#0B2B2B] hover:bg-teal-800 text-white px-4 py-2 rounded-md transition cursor-pointer">
-                      Order Now
-                    </button>
+                    <Link to={`/sushi/${sushi._id}`}>
+                      <button
+                        // onClick={() => handleView(sushi._id)}
+                        className="bg-[#0B2B2B] hover:bg-teal-800 text-white px-4 py-2 rounded-md transition cursor-pointer"
+                      >
+                        View Details
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </div>

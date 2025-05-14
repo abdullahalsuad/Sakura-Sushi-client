@@ -41,7 +41,7 @@ const Navbar = () => {
           {/* CTA Button */}
           <div className="hidden md:flex">
             <Link
-              to="/order"
+              to="/menu"
               className="bg-teal-500 hover:bg-teal-600 text-white font-semibold px-5 py-2 rounded-full transition duration-300"
             >
               Order Now

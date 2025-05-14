@@ -4,9 +4,11 @@ import Loading from "../Loading/Loading";
 import { PiChefHat } from "react-icons/pi";
 import { TfiMoney } from "react-icons/tfi";
 import { IoTimeOutline } from "react-icons/io5";
-import { FiEdit } from "react-icons/fi";
+import { FiEdit, FiEye } from "react-icons/fi";
 import { MdOutlineDelete } from "react-icons/md";
 import Swal from "sweetalert2";
+import { toast } from "react-toastify";
+import { Link } from "react-router";
 
 const SushiList = () => {
   const { sushiData, loading, setSushiData } = use(AllSushiDataContext);
@@ -15,7 +17,8 @@ const SushiList = () => {
     return <Loading />;
   }
 
-  const handleClick = async (id) => {
+  // handle delete
+  const handleDelete = async (id) => {
     console.log(id);
 
     // alert
@@ -41,15 +44,8 @@ const SushiList = () => {
 
           // Remove from UI
           setSushiData((prev) => prev.filter((sushi) => sushi._id !== id));
-
           if (response.ok) {
-            Swal.fire({
-              title: "Deleted!",
-              text: "Your sushi has been deleted.",
-              icon: "success",
-            });
-          } else {
-            console.error("Failed to delete");
+            toast.success("Sushi deleted successfully");
           }
         } catch (error) {
           console.log("Error from deleting sushi", error);
@@ -57,6 +53,11 @@ const SushiList = () => {
       }
     });
   };
+
+  // handle view
+  // const handleView = async (id) => {
+
+  // };
 
   return (
     <>
@@ -100,17 +101,26 @@ const SushiList = () => {
 
                 {/* Action Buttons */}
                 <div className="flex flex-col gap-2 items-end">
-                  <button className="bg-[#0B2B2B] hover:bg-teal-800 text-white px-4 py-4 rounded-md transition cursor-pointer">
-                    <FiEdit size={20} />
-                  </button>
+                  <Link to={`/sushi/update/${sushi._id}`}>
+                    <button className="bg-[#0B2B2B] hover:bg-teal-800 text-white px-4 py-4 rounded-md transition cursor-pointer">
+                      <FiEdit size={20} />
+                    </button>
+                  </Link>
+
+                  <Link to={`/sushi/${sushi._id}`}>
+                    <button
+                      // onClick={() => handleView(sushi._id)}
+                      className="bg-[#0B2B2B] hover:bg-teal-800 text-white px-4 py-4 rounded-md transition cursor-pointer"
+                    >
+                      <FiEye size={20} />
+                    </button>
+                  </Link>
+
                   <button
-                    onClick={() => handleClick(sushi._id)}
+                    onClick={() => handleDelete(sushi._id)}
                     className="bg-[#ff5a5a] hover:bg-teal-800 text-white px-4 py-4 rounded-md transition cursor-pointer"
                   >
                     <MdOutlineDelete size={20} />
-                  </button>
-                  <button className="bg-[#0B2B2B] hover:bg-teal-800 text-white px-4 py-4 rounded-md transition cursor-pointer">
-                    <FiEdit size={20} />
                   </button>
                 </div>
               </div>

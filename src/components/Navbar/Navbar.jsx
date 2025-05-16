@@ -41,10 +41,10 @@ const Navbar = () => {
           {/* CTA Button */}
           <div className="hidden md:flex">
             <Link
-              to="/menu"
-              className="bg-teal-500 hover:bg-teal-600 text-white font-semibold px-5 py-2 rounded-full transition duration-300"
+              to="/signin"
+              className="bg-teal-500 hover:bg-teal-600 text-white font-semibold px-5 py-2 rounded-md transition duration-300"
             >
-              Order Now
+              Login
             </Link>
           </div>
 
@@ -86,11 +86,10 @@ const Navbar = () => {
           </Link>
 
           <Link
-            to="/order"
-            className="block text-center bg-teal-500 hover:bg-teal-600 text-white font-semibold px-5 py-2 rounded-full transition duration-300"
-            onClick={() => setIsMobileMenuOpen(false)}
+            to="/signin"
+            className="bg-teal-500 hover:bg-teal-600 text-white font-semibold px-5 py-2 rounded-md transition duration-300"
           >
-            Order Now
+            Login
           </Link>
         </div>
       )}

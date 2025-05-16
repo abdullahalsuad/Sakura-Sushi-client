@@ -7,6 +7,9 @@ import MenuPage from "../components/menu/MenuPage.jsx";
 import SushiDashboard from "../components/Add/SushiDashboard.jsx";
 import SushiDetails from "../components/homemenu/SushiDetails.jsx";
 import SushiUpdate from "../components/Add/SushiUpdate.jsx";
+import SignIn from "../components/Auth/SignIn.jsx";
+import SignUp from "../components/Auth/signUp.jsx";
+import Profile from "../components/Profile/Profile.jsx";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +40,18 @@ const router = createBrowserRouter([
       {
         path: "/sushi/update/:id",
         element: <SushiUpdate />,
+      },
+      {
+        path: "/signin",
+        element: <SignIn />,
+      },
+      {
+        path: "/signup",
+        element: <SignUp />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
       },
     ],
   },

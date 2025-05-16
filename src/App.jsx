@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import { ToastContainer } from "react-toastify";
 import AllSushiDataProvider from "./context/AllSushiProvider";
+import AuthProvider from "./context/AuthProvider";
 
 function App() {
   return (
@@ -17,9 +18,11 @@ function App() {
 
           {/* Main Content */}
           <div className="mb-20">
-            <AllSushiDataProvider>
-              <Outlet />
-            </AllSushiDataProvider>
+            <AuthProvider>
+              <AllSushiDataProvider>
+                <Outlet />
+              </AllSushiDataProvider>
+            </AuthProvider>
           </div>
         </div>
 

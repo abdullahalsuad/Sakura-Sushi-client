@@ -1,6 +1,6 @@
 import React, { use } from "react";
-import { AllSushiDataContext } from "../../context/AllSushiProvider";
-import Loading from "../Loading/Loading";
+import { AllSushiDataContext } from "../../../context/AllSushiProvider";
+import Loading from "../../../components/Loading/Loading";
 import { PiChefHat } from "react-icons/pi";
 import { TfiMoney } from "react-icons/tfi";
 import { IoTimeOutline } from "react-icons/io5";
@@ -57,14 +57,9 @@ const SushiList = () => {
     });
   };
 
-  // handle view
-  // const handleView = async (id) => {
-
-  // };
-
   return (
     <>
-      <section className="bg-white py-16 px-4">
+      <section className="bg-white  px-4">
         {/* Menu Grid - 2 Columns */}
         <div className="space-y-4">
           {sushiData.map((sushi) => (

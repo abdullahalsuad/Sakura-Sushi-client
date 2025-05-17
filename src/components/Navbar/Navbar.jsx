@@ -1,9 +1,26 @@
-import { Link } from "react-router";
+import { Link, Navigate, useNavigate } from "react-router";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { useState } from "react";
+import { use, useState } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import { toast } from "react-toastify";
+import { MdLogout } from "react-icons/md";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const { user, signOutUser, setUser } = use(AuthContext);
+
+  let handleSignOut = async () => {
+    try {
+      await signOutUser();
+      navigate("/");
+      toast.success("Logout successful.");
+    } catch (error) {
+      console.log(error);
+    }
+
+    setUser(null);
+  };
 
   return (
     <nav className="bg-black text-white shadow-lg sticky top-0 z-50">
@@ -39,13 +56,32 @@ const Navbar = () => {
           </div>
 
           {/* CTA Button */}
+
           <div className="hidden md:flex">
-            <Link
-              to="/signin"
-              className="bg-teal-500 hover:bg-teal-600 text-white font-semibold px-5 py-2 rounded-md transition duration-300"
-            >
-              Login
-            </Link>
+            {user ? (
+              <>
+                <Link
+                  to="/dashboard"
+                  className="bg-teal-500 hover:bg-teal-600 text-white font-semibold px-5 py-2 rounded-md transition duration-300"
+                >
+                  Dashboard
+                </Link>
+                <Link
+                  to="/dashboard"
+                  onClick={handleSignOut}
+                  className="bg-red-400 hover:bg-red-600 text-white font-semibold px-5 py-2 rounded-md transition duration-300 ml-2 flex items-center"
+                >
+                  <MdLogout size={20} />
+                </Link>
+              </>
+            ) : (
+              <Link
+                to="/menu"
+                className="bg-teal-500 hover:bg-teal-600 text-white font-semibold px-5 py-2 rounded-md transition duration-300"
+              >
+                See Menu
+              </Link>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -85,12 +121,21 @@ const Navbar = () => {
             About
           </Link>
 
-          <Link
-            to="/signin"
-            className="bg-teal-500 hover:bg-teal-600 text-white font-semibold px-5 py-2 rounded-md transition duration-300"
-          >
-            Login
-          </Link>
+          {user ? (
+            <Link
+              to="/dashboard"
+              className="bg-teal-500 hover:bg-teal-600 text-white font-semibold px-5 py-2 rounded-md transition duration-300"
+            >
+              Dashboard
+            </Link>
+          ) : (
+            <Link
+              to="/menu"
+              className="bg-teal-500 hover:bg-teal-600 text-white font-semibold px-5 py-2 rounded-md transition duration-300"
+            >
+              See Menu
+            </Link>
+          )}
         </div>
       )}
     </nav>

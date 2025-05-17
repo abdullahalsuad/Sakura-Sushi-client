@@ -1,6 +1,6 @@
 import React, { use } from "react";
 import { toast } from "react-toastify";
-import { AllSushiDataContext } from "../../context/AllSushiProvider";
+import { AllSushiDataContext } from "../../../context/AllSushiProvider";
 
 const AddSushiForm = () => {
   const { setSushiData } = use(AllSushiDataContext);
@@ -45,7 +45,7 @@ const AddSushiForm = () => {
   };
 
   return (
-    <div className=" min-h-screen px-4 ">
+    <div className="  px-4 ">
       <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-md p-8 border border-gray-200">
         <h2 className="text-2xl font-bold text-center text-[#0B2B2B] mb-6">
           Add New Sushi

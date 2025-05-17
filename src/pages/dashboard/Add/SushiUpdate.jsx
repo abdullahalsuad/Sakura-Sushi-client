@@ -1,8 +1,8 @@
 import React, { use } from "react";
 import { useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
-import { AllSushiDataContext } from "../../context/AllSushiProvider";
-import Loading from "../Loading/Loading";
+import { AllSushiDataContext } from "../../../context/AllSushiProvider";
+import Loading from "../../../components/Loading/Loading";
 
 const SushiUpdate = () => {
   const { sushiData, loading } = use(AllSushiDataContext);

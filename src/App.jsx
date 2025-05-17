@@ -18,11 +18,9 @@ function App() {
 
           {/* Main Content */}
           <div className="mb-20">
-            <AuthProvider>
-              <AllSushiDataProvider>
-                <Outlet />
-              </AllSushiDataProvider>
-            </AuthProvider>
+            <AllSushiDataProvider>
+              <Outlet />
+            </AllSushiDataProvider>
           </div>
         </div>
 

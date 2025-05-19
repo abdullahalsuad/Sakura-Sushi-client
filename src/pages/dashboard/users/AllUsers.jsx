@@ -9,7 +9,7 @@ const AllUsers = () => {
     const fetchUser = async () => {
       try {
         const response = await fetch(
-          "https://sakura-sushi-server.vercel.app/users"
+          "https://sakura-sushi-server.vercel.app/api/users"
         );
         const data = await response.json();
 

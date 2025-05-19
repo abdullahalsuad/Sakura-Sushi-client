@@ -36,7 +36,7 @@ const SushiList = () => {
       if (result.isConfirmed) {
         try {
           const response = await fetch(
-            `https://sakura-sushi-server.vercel.app/sushi/${id}`,
+            `https://sakura-sushi-server.vercel.app/api/sushi/${id}`,
             {
               method: "DELETE",
               headers: {

@@ -15,7 +15,7 @@ const AddSushiForm = () => {
     // send data to the backend
     try {
       const response = await fetch(
-        "https://sakura-sushi-server.vercel.app/sushi",
+        "https://sakura-sushi-server.vercel.app/api/sushi",
         {
           method: "POST",
           headers: {

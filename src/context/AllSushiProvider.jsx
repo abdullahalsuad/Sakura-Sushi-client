@@ -13,7 +13,7 @@ const AllSushiDataProvider = ({ children }) => {
     const fetchNews = async () => {
       try {
         const response = await fetch(
-          "https://sakura-sushi-server.vercel.app/sushi"
+          "https://sakura-sushi-server.vercel.app/api/sushi"
         );
         const data = await response.json();
         setSushiData(data);
